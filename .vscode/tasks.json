@@ -47,6 +47,21 @@
             }
         },
         {
+            "label": "CheckVersion",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${cwd}\\.vscode\\CheckAppVersion.ps1"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "AppDeployToolkitHelp",
             "type": "shell",
             "command": "powershell",

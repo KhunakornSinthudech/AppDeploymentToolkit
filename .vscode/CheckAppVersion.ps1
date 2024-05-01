@@ -31,10 +31,11 @@ if ($EvergreenVersion -gt $localVersion ){
             #Pass the exception as an inner exception
             throw [System.Net.WebException]::new("Download error $($EvergreenApp.URI).", $_.Exception)
         }
-	if (-not ($EvergreenApp.Md5.ToUpper-eq $(Get-FileHash "$path\7zip.msi" -Algorithm Md5).Hash.ToUpper))
+	if (-not ($EvergreenApp.Md5.ToUpper -eq $(Get-FileHash "$path\7zip.msi" -Algorithm "Md5").Hash.ToUpper))
         {
             throw [System.Activities.VersionMismatchException]::new('Hash mismatch')
         }
+        else {explorer $path}
     }
 
 
