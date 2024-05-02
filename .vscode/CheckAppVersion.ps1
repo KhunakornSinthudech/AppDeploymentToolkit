@@ -9,7 +9,7 @@
 
 # TODO set the search option if the app
 $EvergreenApp = Get-EvergreenApp  -Name $Application | Where-Object { $_.Architecture -eq 'x64' -and $_.Type -eq 'msi' }
-$EvergreenAppInvoke = Invoke-EvergreenApp  -Name $Application | Where-Object { $_.Architecture -eq 'x64' -and $_.Type -eq 'msi' }
+# $EvergreenAppInvoke = Invoke-EvergreenApp  -Name $Application | Where-Object { $_.Architecture -eq 'x64' -and $_.Type -eq 'msi' }
 $EvergreenVersion = $EvergreenApp.version
 
 
@@ -27,7 +27,7 @@ if ($EvergreenVersion -gt $localVersion ){
 	Remove-Item "$path\$Application.msi"  -ErrorAction SilentlyContinue
         try
         {
-            Write-Host "Downloading new version"
+            Write-Output "Downloading new version"
             $WebClient.DownloadFile($EvergreenApp.URI, "$path\$Application.msi")
         }
         catch
@@ -43,6 +43,6 @@ if ($EvergreenVersion -gt $localVersion ){
             # Set-Content $path\version.txt $EvergreenVersion
             explorer $path}
     }
-else {Write-Host "$Application is up to date"}
+else { Write-Output "$Application is up to date" }
 
 
